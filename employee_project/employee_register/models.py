@@ -11,4 +11,4 @@ class Employee(models.Model):
 
 
 class Meta:
-    db_table = "tb1employee"
+    db_table = "Employee"
