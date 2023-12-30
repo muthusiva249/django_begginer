@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm
 # import sys
@@ -8,15 +9,13 @@ def create_employee(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('search/')
+                messages.success(request, 'Form submitted successfully!')
+                return redirect('')
             except:
                 pass
     else:
         form = EmployeeForm()
-        # var_name = {'name': 'muthu'}
-        # print(var_name)
-        # sys.exit()
-
+    # return render(request, 'create.html')
     return render(request, 'create.html', {'form':form})
 
 # Search Blog

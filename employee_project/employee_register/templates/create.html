@@ -9,6 +9,7 @@
     <title>Create Employee</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <style>
     label {
     font-weight: 600;
@@ -24,30 +25,40 @@ body {
   margin-top: -3rem;
 }
     </style>
-<!-- <form method="POST" > -->
-    <!-- <input type="submit" class="btn btn-success"> -->
 
 <body>
     <div class="container mt-3">
-        <form method="POST">
+        <form method="POST" id="submit_form" >
+          {% csrf_token %}
+          <!-- {{ form.as_p }} -->
           <div class="row jumbotron box8">
             <div class="col-sm-12 mx-t3 mb-4">
               <h2 class="text-center text-info">Create Employee</h2>
             </div>
-            <div class="col-sm-6 form-group">
-              <label for="name-f">First Name</label>
-              <input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter your first name." required>
-            </div>
-            <div class="col-sm-6 form-group">
-              <label for="name-l">Last name</label>
-              <input type="text" class="form-control" name="lname" id="name-l" placeholder="Enter your last name." required>
-            </div>
-            <div class="col-sm-6 form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email." required>
-            </div>
 
             <div class="col-sm-6 form-group">
+              <label for="{{ form.firstname.id_for_label }}">First Name</label>
+              <div class="input-group">
+                <input type="text" class="form-control" name="{{ form.firstname.name }}" id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name." value="{{ form.firstname.value|default:'' }}" required>
+                <!-- {{ form.firstname.errors }} -->
+              </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="{{ form.lastname.id_for_label }}">Last Name</label>
+            <div class="input-group">
+              <input type="text" class="form-control" name="{{ form.lastname.name }}" id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name." value="{{ form.lastname.value|default:'' }}" required>
+              <!-- {{ form.lastname.errors }} -->
+            </div>
+          </div>
+
+            <div class="col-sm-6 form-group">
+              <label for="{{ form.id_email.id_for_label }}">Email</label>
+              <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required>
+              <!-- {{ form.email.errors }} -->
+            </div>
+
+            <!-- <div class="col-sm-6 form-group">
               <label for="sex">Gender</label>
               <select id="sex" class="form-control browser-default custom-select">
                 <option value="">Select Gender</option>
@@ -55,11 +66,24 @@ body {
                 <option value="female">Female</option>
                 <option value="unspesified">Unspecified</option>
               </select>
+            </div> -->
+
+            <div class="col-sm-6 form-group">
+              <label for="{{ form.contact.id_for_label }}">Contact</label>
+              <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}" placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}"pattern="[6-9]\d{9}" maxLength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
+              <!-- {{ form.contact.errors }} -->
             </div>
 
             <div class="col-sm-6 form-group">
-              <label for="tel">Phone</label>
-              <input type="tel" name="phone" class="form-control" id="tel" placeholder="Enter Your Contact Number." required>
+              <label for="{{ form.designation.id_for_label }}">Desg</label>
+              <input type="text" class="form-control" name="{{ form.designation.name }}" id="{{ form.designation.id_for_label }}" placeholder="Enter designation." value="{{ form.designation.value|default:'' }}" required>
+              <!-- {{ form.designation.errors }} -->
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label for="{{ form.salary.id_for_label }}">Salary</label>
+              <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}" placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
+              <!-- {{ form.salary.errors }} -->
             </div>
 
             <div class="col-sm-12">
@@ -74,12 +98,13 @@ body {
           </div>
         </form>
       </div>
-</body>
+
+
 
 <script>
-fName = document.getElementById("name-f").value;
-console.log(fName)
-// alert(fName)
+
 </script>
 
+
+</body>
 </html>
