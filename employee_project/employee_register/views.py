@@ -4,12 +4,15 @@ from .forms import EmployeeForm
 # import sys
 
 def create_employee(request):
+    success_message = None
+    
     if request.method == "POST":
         form = EmployeeForm(request.POST)
         if form.is_valid():
             try:
                 form.save()
-                messages.success(request, 'Form submitted successfully!')
+                success_message = 'Form submitted successfully!'
+                messages.success(request, success_message)
                 return redirect('')
             except:
                 pass
