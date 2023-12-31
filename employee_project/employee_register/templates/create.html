@@ -2,64 +2,73 @@
 <html lang="en">
 <!-- C:\Users\Muthu\Documents\create_emp.txt - refer path for employee form -->
 <!-- https://codepen.io/ys-programmer/pen/rNxmLqm - lit table -->
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Employee</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Employee</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <style>
-    label {
+  label {
     font-weight: 600;
     color: #666;
-}
-body {
-  background: #f1f1f1;
-}
-.box8{
-  box-shadow: 0px 0px 5px 1px #999;
-}
-.mx-t3{
-  margin-top: -3rem;
-}
-    </style>
+  }
+
+  body {
+    background: #f1f1f1;
+  }
+
+  .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+  }
+
+  .mx-t3 {
+    margin-top: -3rem;
+  }
+</style>
 
 <body>
-    <div class="container mt-3">
-        <form method="POST" id="submit_form" >
-          {% csrf_token %}
-          <!-- {{ form.as_p }} -->
-          <div class="row jumbotron box8">
-            <div class="col-sm-12 mx-t3 mb-4">
-              <h2 class="text-center text-info">Create Employee</h2>
-            </div>
+  <div class="container mt-3">
+    <form method="POST" id="submit_form">
+      {% csrf_token %}
+      <!-- {{ form.as_p }} -->
+      <div class="row jumbotron box8">
+        <div class="col-sm-12 mx-t3 mb-4">
+          <h2 class="text-center text-info">Create Employee</h2>
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.firstname.id_for_label }}">First Name</label>
-              <div class="input-group">
-                <input type="text" class="form-control" name="{{ form.firstname.name }}" id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name." value="{{ form.firstname.value|default:'' }}" required>
-                <!-- {{ form.firstname }} -->
-                <!-- {{ form.firstname.errors }} -->
-              </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.firstname.id_for_label }}">First Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.firstname.name }}"
+              id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name."
+              value="{{ form.firstname.value|default:'' }}" required>
+            <!-- {{ form.firstname }} -->
+            <!-- {{ form.firstname.errors }} -->
           </div>
+        </div>
 
-          <div class="col-sm-6 form-group">
-            <label for="{{ form.lastname.id_for_label }}">Last Name</label>
-            <div class="input-group">
-              <input type="text" class="form-control" name="{{ form.lastname.name }}" id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name." value="{{ form.lastname.value|default:'' }}" required>
-              <!-- {{ form.lastname.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.lastname.id_for_label }}">Last Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.lastname.name }}"
+              id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name."
+              value="{{ form.lastname.value|default:'' }}" required>
+            <!-- {{ form.lastname.errors }} -->
           </div>
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.id_email.id_for_label }}">Email</label>
-              <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required>
-              <!-- {{ form.email.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.id_email.id_for_label }}">Email</label>
+          <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+            placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required>
+          <!-- {{ form.email.errors }} -->
+        </div>
 
-            <!-- <div class="col-sm-6 form-group">
+        <!-- <div class="col-sm-6 form-group">
               <label for="sex">Gender</label>
               <select id="sex" class="form-control browser-default custom-select">
                 <option value="">Select Gender</option>
@@ -69,70 +78,78 @@ body {
               </select>
             </div> -->
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.contact.id_for_label }}">Contact</label>
-              <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}" placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}"pattern="[6-9]\d{9}" maxLength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
-              <!-- {{ form.contact.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.contact.id_for_label }}">Contact</label>
+          <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}"
+            placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}" pattern="[6-9]\d{9}"
+            maxLength="10"
+            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+            required>
+          <!-- {{ form.contact.errors }} -->
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.designation.id_for_label }}">Desg</label>
-              <input type="text" class="form-control" name="{{ form.designation.name }}" id="{{ form.designation.id_for_label }}" placeholder="Enter designation." value="{{ form.designation.value|default:'' }}" required>
-              <!-- {{ form.designation.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.designation.id_for_label }}">Desg</label>
+          <input type="text" class="form-control" name="{{ form.designation.name }}"
+            id="{{ form.designation.id_for_label }}" placeholder="Enter designation."
+            value="{{ form.designation.value|default:'' }}" required>
+          <!-- {{ form.designation.errors }} -->
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.salary.id_for_label }}">Salary</label>
-              <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}" placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
-              <!-- {{ form.salary.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.salary.id_for_label }}">Salary</label>
+          <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}"
+            placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
+          <!-- {{ form.salary.errors }} -->
+        </div>
 
-            <div class="col-sm-12">
-              <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
-              </label>
-            </div>
-      
-            <div class="col-sm-12 form-group mb-0">
-              <button  type="submit" class="btn btn-primary float-right">Submit</button>
-            </div>
-      
-          </div>
-        </form>
+        <div class="col-sm-12">
+          <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb"
+            class="form-check-label">&nbsp;I accept all terms and conditions.
+          </label>
+        </div>
+
+        <div class="col-sm-12 form-group mb-0">
+          <button type="submit" class="btn btn-primary float-right">Submit</button>
+        </div>
+
       </div>
+    </form>
+  </div>
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+ 
+ <script>
+    $(document).ready(function () {
+      var submitted = localStorage.getItem('formSubmitted');
+      $('#submit_form').submit(function (event) {
+        localStorage.setItem('formSubmitted', 'true'); // Set the flag to true upon form submission
+      });
+      if (submitted === 'true') {
+        $('#submit_form input[type="text"]').val('');
+        $('#submit_form input[type="number"]').val('');
+        $('#submit_form input[type="tel"]').val('');
+        $('#submit_form input[type="email"]').val('');
+        Swal.fire({
+          title: 'Form submitted successfully!',
+          icon: 'success',
+          confirmButtonText: 'Okay'
+        });
+        localStorage.setItem('formSubmitted', 'false'); // Reset the flag after displaying the message
+      }
 
-<script>
-$(document).ready(function(){
-  {% if messages %}
-      {% for message in messages %}
-          toastr['{{ message.tags }}']('{{ message }}');
-          console.log("msg: " + '{{ message }}');
+      // Clear local storage on a fresh page load to prevent displaying the message again
+      localStorage.setItem('formSubmitted', 'false');
 
-          var success_message = '{{ message }}';
-          console.log(success_message);
+    });
 
-          if (success_message == "Form submitted successfully!") 
-          {
-              $('#submit_form input[type="text"]').val('');
-              $('#submit_form input[type="number"]').val('');
-              $('#submit_form input[type="tel"]').val('');
-              $('#submit_form input[type="email"]').val('');
-              // setTimeout(function() {
-              //           location.reload();
-              //       }, 3000);
-          }
-        
-      {% endfor %}
-  {% endif %}
-});
-</script>
-
-
+  </script>
 </body>
+
 </html>
