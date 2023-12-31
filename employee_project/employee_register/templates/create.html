@@ -28,12 +28,19 @@ body {
 
 <body>
     <div class="container mt-3">
-        <form method="POST" id="submit_form" >
+        <form method="POST" id="submit_form">
           {% csrf_token %}
           <!-- {{ form.as_p }} -->
           <div class="row jumbotron box8">
             <div class="col-sm-12 mx-t3 mb-4">
               <h2 class="text-center text-info">Create Employee</h2>
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-success" role="alert">
+                    {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
             </div>
 
             <div class="col-sm-6 form-group">
@@ -55,7 +62,7 @@ body {
 
             <div class="col-sm-6 form-group">
               <label for="{{ form.id_email.id_for_label }}">Email</label>
-              <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required>
+              <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required >
               <!-- {{ form.email.errors }} -->
             </div>
 
@@ -99,40 +106,6 @@ body {
           </div>
         </form>
       </div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
-<script>
-$(document).ready(function(){
-  {% if messages %}
-      {% for message in messages %}
-          toastr['{{ message.tags }}']('{{ message }}');
-          console.log("msg: " + '{{ message }}');
-
-          var success_message = '{{ message }}';
-          console.log(success_message);
-
-          if (success_message == "Form submitted successfully!") 
-          {
-              $('#submit_form input[type="text"]').val('');
-              $('#submit_form input[type="number"]').val('');
-              $('#submit_form input[type="tel"]').val('');
-              $('#submit_form input[type="email"]').val('');
-              // setTimeout(function() {
-              //           location.reload();
-              //       }, 3000);
-          }
-        
-      {% endfor %}
-  {% endif %}
-});
-</script>
-
 
 </body>
 </html>
