@@ -31,14 +31,21 @@
 </style>
 
 <body>
-  <div class="container mt-3">
-    <form method="POST" id="submit_form">
-      {% csrf_token %}
-      <!-- {{ form.as_p }} -->
-      <div class="row jumbotron box8">
-        <div class="col-sm-12 mx-t3 mb-4">
-          <h2 class="text-center text-info">Create Employee</h2>
-        </div>
+    <div class="container mt-3">
+        <form method="POST" id="submit_form">
+          {% csrf_token %}
+          <!-- {{ form.as_p }} -->
+          <div class="row jumbotron box8">
+            <div class="col-sm-12 mx-t3 mb-4">
+              <h2 class="text-center text-info">Create Employee</h2>
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-success" role="alert">
+                    {{message}}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
 
         <div class="col-sm-6 form-group">
           <label for="{{ form.firstname.id_for_label }}">First Name</label>
@@ -61,22 +68,21 @@
           </div>
         </div>
 
-        <div class="col-sm-6 form-group">
-          <label for="{{ form.id_email.id_for_label }}">Email</label>
-          <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
-            placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required>
-          <!-- {{ form.email.errors }} -->
-        </div>
+            <div class="col-sm-6 form-group">
+              <label for="{{ form.id_email.id_for_label }}">Email</label>
+              <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required >
+              <!-- {{ form.email.errors }} -->
+            </div>
 
-        <!-- <div class="col-sm-6 form-group">
-              <label for="sex">Gender</label>
-              <select id="sex" class="form-control browser-default custom-select">
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="unspesified">Unspecified</option>
-              </select>
-            </div> -->
+          <!-- <div class="col-sm-6 form-group">
+                <label for="sex">Gender</label>
+                <select id="sex" class="form-control browser-default custom-select">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="unspesified">Unspecified</option>
+                </select>
+              </div> -->
 
         <div class="col-sm-6 form-group">
           <label for="{{ form.contact.id_for_label }}">Contact</label>
@@ -117,39 +123,5 @@
     </form>
   </div>
 
-
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
- <script>
-    $(document).ready(function () {
-      var submitted = localStorage.getItem('formSubmitted');
-      $('#submit_form').submit(function (event) {
-        localStorage.setItem('formSubmitted', 'true'); // Set the flag to true upon form submission
-      });
-      if (submitted === 'true') {
-        $('#submit_form input[type="text"]').val('');
-        $('#submit_form input[type="number"]').val('');
-        $('#submit_form input[type="tel"]').val('');
-        $('#submit_form input[type="email"]').val('');
-        Swal.fire({
-          title: 'Form submitted successfully!',
-          icon: 'success',
-          confirmButtonText: 'Okay'
-        });
-        localStorage.setItem('formSubmitted', 'false'); // Reset the flag after displaying the message
-      }
-
-      // Clear local storage on a fresh page load to prevent displaying the message again
-      localStorage.setItem('formSubmitted', 'false');
-
-    });
-
-  </script>
 </body>
-
 </html>

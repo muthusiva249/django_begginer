@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .forms import EmployeeForm
 # import sys
 
@@ -11,13 +12,14 @@ def create_employee(request):
         if form.is_valid():
             try:
                 form.save()
-                success_message = 'Form submitted successfully!'
+                success_message = 'Employee created successfully!'
                 messages.success(request, success_message)
-                return redirect('')
+                return redirect(reverse('create-employee'))
             except:
                 pass
     else:
         form = EmployeeForm()
+        # messages.success(request, success_message)
     # return render(request, 'create.html')
     return render(request, 'create.html', {'form':form})
 
