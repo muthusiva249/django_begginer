@@ -2,29 +2,33 @@
 <html lang="en">
 <!-- C:\Users\Muthu\Documents\create_emp.txt - refer path for employee form -->
 <!-- https://codepen.io/ys-programmer/pen/rNxmLqm - lit table -->
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Employee</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Employee</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <style>
-    label {
+  label {
     font-weight: 600;
     color: #666;
-}
-body {
-  background: #f1f1f1;
-}
-.box8{
-  box-shadow: 0px 0px 5px 1px #999;
-}
-.mx-t3{
-  margin-top: -3rem;
-}
-    </style>
+  }
+
+  body {
+    background: #f1f1f1;
+  }
+
+  .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+  }
+
+  .mx-t3 {
+    margin-top: -3rem;
+  }
+</style>
 
 <body>
     <div class="container mt-3">
@@ -43,22 +47,26 @@ body {
               {% endif %}
             </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.firstname.id_for_label }}">First Name</label>
-              <div class="input-group">
-                <input type="text" class="form-control" name="{{ form.firstname.name }}" id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name." value="{{ form.firstname.value|default:'' }}" required>
-                <!-- {{ form.firstname }} -->
-                <!-- {{ form.firstname.errors }} -->
-              </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.firstname.id_for_label }}">First Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.firstname.name }}"
+              id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name."
+              value="{{ form.firstname.value|default:'' }}" required>
+            <!-- {{ form.firstname }} -->
+            <!-- {{ form.firstname.errors }} -->
           </div>
+        </div>
 
-          <div class="col-sm-6 form-group">
-            <label for="{{ form.lastname.id_for_label }}">Last Name</label>
-            <div class="input-group">
-              <input type="text" class="form-control" name="{{ form.lastname.name }}" id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name." value="{{ form.lastname.value|default:'' }}" required>
-              <!-- {{ form.lastname.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.lastname.id_for_label }}">Last Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.lastname.name }}"
+              id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name."
+              value="{{ form.lastname.value|default:'' }}" required>
+            <!-- {{ form.lastname.errors }} -->
           </div>
+        </div>
 
             <div class="col-sm-6 form-group">
               <label for="{{ form.id_email.id_for_label }}">Email</label>
@@ -66,46 +74,54 @@ body {
               <!-- {{ form.email.errors }} -->
             </div>
 
-            <!-- <div class="col-sm-6 form-group">
-              <label for="sex">Gender</label>
-              <select id="sex" class="form-control browser-default custom-select">
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="unspesified">Unspecified</option>
-              </select>
-            </div> -->
+          <!-- <div class="col-sm-6 form-group">
+                <label for="sex">Gender</label>
+                <select id="sex" class="form-control browser-default custom-select">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="unspesified">Unspecified</option>
+                </select>
+              </div> -->
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.contact.id_for_label }}">Contact</label>
-              <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}" placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}"pattern="[6-9]\d{9}" maxLength="10" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
-              <!-- {{ form.contact.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.contact.id_for_label }}">Contact</label>
+          <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}"
+            placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}" pattern="[6-9]\d{9}"
+            maxLength="10"
+            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+            required>
+          <!-- {{ form.contact.errors }} -->
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.designation.id_for_label }}">Desg</label>
-              <input type="text" class="form-control" name="{{ form.designation.name }}" id="{{ form.designation.id_for_label }}" placeholder="Enter designation." value="{{ form.designation.value|default:'' }}" required>
-              <!-- {{ form.designation.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.designation.id_for_label }}">Desg</label>
+          <input type="text" class="form-control" name="{{ form.designation.name }}"
+            id="{{ form.designation.id_for_label }}" placeholder="Enter designation."
+            value="{{ form.designation.value|default:'' }}" required>
+          <!-- {{ form.designation.errors }} -->
+        </div>
 
-            <div class="col-sm-6 form-group">
-              <label for="{{ form.salary.id_for_label }}">Salary</label>
-              <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}" placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
-              <!-- {{ form.salary.errors }} -->
-            </div>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.salary.id_for_label }}">Salary</label>
+          <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}"
+            placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
+          <!-- {{ form.salary.errors }} -->
+        </div>
 
-            <div class="col-sm-12">
-              <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb" class="form-check-label">&nbsp;I accept all terms and conditions.
-              </label>
-            </div>
-      
-            <div class="col-sm-12 form-group mb-0">
-              <button  type="submit" class="btn btn-primary float-right">Submit</button>
-            </div>
-      
-          </div>
-        </form>
+        <div class="col-sm-12">
+          <input type="checkbox" class="form-check d-inline" id="chb" required><label for="chb"
+            class="form-check-label">&nbsp;I accept all terms and conditions.
+          </label>
+        </div>
+
+        <div class="col-sm-12 form-group mb-0">
+          <button type="submit" class="btn btn-primary float-right">Submit</button>
+        </div>
+
       </div>
+    </form>
+  </div>
 
 </body>
 </html>
