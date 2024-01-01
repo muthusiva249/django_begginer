@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import EmployeeForm
+from .models import Employee
 # import sys
 
 def create_employee(request):
@@ -26,5 +27,5 @@ def create_employee(request):
 # Search Blog
         
 def retrieve_employee(request):
-    employee = employee.objects.all()
-    return render(request,'search.html',{'employee':employee} )
+    employees = Employee.objects.all()
+    return render(request,'search.html',{'employee':employees} )

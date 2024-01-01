@@ -10,7 +10,7 @@
   <title>Create Employee</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 <style>
   label {
     font-weight: 600;
@@ -38,9 +38,10 @@
           <div class="row jumbotron box8">
             <div class="col-sm-12 mx-t3 mb-4">
               <h2 class="text-center text-info">Create Employee</h2>
+              <!--  -->
               {% if messages %}
                 {% for message in messages %}
-                  <div class="alert alert-success" role="alert">
+                  <div class="alert alert-success" id="alert-message" role="alert">
                     {{message}}
                   </div>
                 {% endfor %}
@@ -122,6 +123,16 @@
       </div>
     </form>
   </div>
+
+  <script>
+    // Set timeout for the alert message
+    setTimeout(function() {
+        var alertMessage = document.getElementById('alert-message');
+        if (alertMessage) {
+            alertMessage.style.display = 'none';
+        }
+    }, 3000); // Adjust the time (in milliseconds) as needed
+  </script>
 
 </body>
 </html>
