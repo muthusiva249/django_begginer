@@ -1,53 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Blog</title>
-</head>
 <style>
-    table,
-    th,
-    td 
-    {
-        border: 2px solid;
+    body {
+  margin: 0;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table td,
+.table th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+}
+
+.table th {
+  background-color: #92c9e6;
+  color: #ffffff;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #d1e8f5;
+}
+
+/*responsive*/
+
+@media (max-width: 500px) {
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+  .table tr {
+    margin-bottom: 15px;
+  }
+  .table td {
+    padding-left: 50%;
+    text-align: left;
+    position: relative;
+  }
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+  }
+
+  .mx-t3 {
+    margin-top: -3rem;
+  }
+
+    .panel-body {
+    padding: 40px;
     }
+    
+    .panel-primary {
+    border-color: #17a2b8;
+    }
+
+    .txt-white {
+    color: #e4eaf0;
+    text-decoration: none;
+}
+
+    a:focus, a:hover {
+    color: #e4eaf0;
+    text-decoration: underline;
+}
+}
 </style>
 
-<body>
-    <h2 style="text-align:center"> Blog Informationn </h2>
-    <table align="center" style="margin: 0px auto;">
-        <thead>
-            <tr>
-                <th>Blog ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Edit Blog</th>
-                <th>Remove Blog</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for blog in blogs %}
-            <tr>
-                <td>{{blog.blog_id}}</td>
-                <td>{{blog.title}}</td>
-                <td>{{blog.author_name}}</td>
-                <td>{{blog.start_date}}</td>
-                <td>{{blog.end_date}}</td>
-                <td>
-                    <a href="/update/{{blog.pk}}">Update</a>    
-                </td>
-                <td>
-                    <a href="/delete/{{blog.pk}}">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<head>
+  <title>Employee List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div class="">
+    <h2 class="text-center" style="color:#17a2b8"><b>Employee List</b></h2>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<!-- <form method="get" action="">
+    <label for="contact">Phone Number:</label>
+    <input type="text" name="contact" id="contact" value="{{ contact_filter }}">
+
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" value="{{ email_filter }}">
+
+    <button type="submit">Apply Filters</button>
+
+    <a href="{% url 'retrieve-employee' %}">
+        <button type="button">Clear Filters</button>
+    </a>
+</form> -->
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+      <div class='row'>
+        <form method='get' id='select_form' action="">
+          <div class='col-lg-3 col-sm-12 col-xs-12 col-md-3'>
+            <label>Contact Number:</label><br/>
+            <input type="contact" class="form-control" name="contact" placeholder="Enter Contact Number" id="contact" value="{{ contact_filter }}" pattern="[7896][0-9]{9}" maxlength="10" >
+          </div>
+
+          <div class='col-lg-3 col-sm-12 col-xs-12 col-md-3'>
+          <label for="email">Email:</label><br/>
+          <input type="text" class="form-control" name="email" id="email" placeholder="Enter email" value="{{ email_filter }}">
+          </div>
+
+          <div class='col-lg-3 col-sm-12 col-xs-12 col-md-3'>
+            <button type='submit' class='btn btn-primary' style='margin-top:25px;'>Search</button>
+            <a href="{% url 'retrieve-employee' %}">
+                <!-- <button type="button">Clear Filters</button> -->
+                <button type='button' class='btn btn-warning' style='margin-top:25px;'>Clear Filter</button>
+            </a>
+
+          </div>
+
+        </form>
+      </div> 
+    </div>
+</div>
+
+<table class="table">
+  <thead>
+    <th>S.No</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Contact</th>
+    <th>Desg</th>
+    <th>Salary</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    {% with sno=1 %}
+    {% for employees in employee %}
+    <tr>
+      <!-- <td class="text-center">{{ sno }}</td> -->
+      <td>{{ forloop.counter }}</td>
+      <td class="text-center">{{employees.firstname}}</td>
+      <td class="text-center">{{employees.lastname}}</td>
+      <td class="text-center">{{employees.email}}</td>
+      <td class="text-center">{{employees.contact}}</td>
+      <td class="text-center">{{employees.designation}}</td>
+      <td class="text-center">{{employees.salary}}</td>
+      <td><button type="button" class="btn btn-success btn-sm">Update</button></td>
+      <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+    </tr>
+    {% endfor %}
+    {% endwith %}
+
+</tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if employee.has_previous %}
+            <button class="btn btn-primary"> <a style="color:white" href="?page=1">&laquo; first</a> <button>
+            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.previous_page_number }}">previous</a> </button>
+        {% endif %}
+
+        <!-- <span class="current">
+            Page {{ employee.number }} of {{ employee.paginator.num_pages }}.
+        </span> -->
+
+        {% if employee.has_next %}
+            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.next_page_number }}">next</a ></button>
+           <button class="btn btn-primary"> <a style="color:white" href="?page={{ employee.paginator.num_pages }}">last &raquo;</a> </button>
+        {% endif %}
+    </span>
+</div>
 </body>
 
 </html>

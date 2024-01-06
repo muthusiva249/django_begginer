@@ -10,7 +10,7 @@
   <title>Create Employee</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 <style>
   label {
     font-weight: 600;
@@ -38,13 +38,6 @@
           <div class="row jumbotron box8">
             <div class="col-sm-12 mx-t3 mb-4">
               <h2 class="text-center text-info">Create Employee</h2>
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-success" role="alert">
-                    {{message}}
-                  </div>
-                {% endfor %}
-              {% endif %}
             </div>
 
         <div class="col-sm-6 form-group">
@@ -93,7 +86,7 @@
             required>
           <!-- {{ form.contact.errors }} -->
         </div>
-
+<!-- <?php ?> -->
         <div class="col-sm-6 form-group">
           <label for="{{ form.designation.id_for_label }}">Desg</label>
           <input type="text" class="form-control" name="{{ form.designation.name }}"
