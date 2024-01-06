@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remove Employee Details</title>
+</head>
+<body>
+    <div class="container mt-3">
+      <h2 style="text-align: center"> Remove Employee</h2>
+
+      <form action="" method="POST">
+        {% csrf_token %}
+
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+            Are you sure you want to delete "{{ employees.id }}"?
+        </div>
+
+        <p>
+            <a href="{% url 'retrieve-employee' %}"><--Return</a>
+        </p>
+
+        <p>
+            <input type="submit" value="Confirm">
+        </p>
+
+    </div>
+</body>
+</html>
