@@ -85,16 +85,6 @@
     .panel-primary {
     border-color: #17a2b8;
     }
-
-    .txt-white {
-    color: #e4eaf0;
-    text-decoration: none;
-}
-
-    a:focus, a:hover {
-    color: #e4eaf0;
-    text-decoration: underline;
-}
 }
 </style>
 
@@ -139,14 +129,14 @@
 
           <div class='col-lg-3 col-sm-12 col-xs-12 col-md-3'>
           <label for="email">Email:</label><br/>
-          <input type="text" class="form-control" name="email" id="email" placeholder="Enter email" value="{{ email_filter }}">
+          <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email Id" value="{{ email_filter }}">
           </div>
 
           <div class='col-lg-3 col-sm-12 col-xs-12 col-md-3'>
             <button type='submit' class='btn btn-primary' style='margin-top:25px;'>Search</button>
             <a href="{% url 'retrieve-employee' %}">
                 <!-- <button type="button">Clear Filters</button> -->
-                <button type='button' class='btn btn-warning' style='margin-top:25px;'>Clear Filter</button>
+             <button type='button' class='btn btn-warning' style='margin-top:25px;'>Clear Filter</button>
             </a>
 
           </div>
@@ -173,13 +163,13 @@
     {% for employees in employee %}
     <tr>
       <!-- <td class="text-center">{{ sno }}</td> -->
-      <td>{{ forloop.counter }}</td>
-      <td class="text-center">{{employees.firstname}}</td>
-      <td class="text-center">{{employees.lastname}}</td>
-      <td class="text-center">{{employees.email}}</td>
-      <td class="text-center">{{employees.contact}}</td>
-      <td class="text-center">{{employees.designation}}</td>
-      <td class="text-center">{{employees.salary}}</td>
+      <td >{{ forloop.counter }}</td>
+      <td >{{employees.firstname}}</td>
+      <td >{{employees.lastname}}</td>
+      <td >{{employees.email}}</td>
+      <td >{{employees.contact}}</td>
+      <td >{{employees.designation}}</td>
+      <td >{{employees.salary}}</td>
       <td><button type="button" class="btn btn-success btn-sm">Update</button></td>
       <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
     </tr>
@@ -189,11 +179,11 @@
 </tbody>
 </table>
 
-<div class="pagination">
+<div class="pagination float-right">
     <span class="step-links">
         {% if employee.has_previous %}
-            <button class="btn btn-primary"> <a style="color:white" href="?page=1">&laquo; first</a> <button>
-            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.previous_page_number }}">previous</a> </button>
+            <button class="btn btn-primary"> <a style="color:white" href="?page=1">&laquo; First</a> <button>
+            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.previous_page_number }}">Previous</a> </button>
         {% endif %}
 
         <!-- <span class="current">
@@ -201,8 +191,8 @@
         </span> -->
 
         {% if employee.has_next %}
-            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.next_page_number }}">next</a ></button>
-           <button class="btn btn-primary"> <a style="color:white" href="?page={{ employee.paginator.num_pages }}">last &raquo;</a> </button>
+            <button class="btn btn-primary"><a style="color:white" href="?page={{ employee.next_page_number }}">Next</a ></button>
+           <button class="btn btn-primary"> <a style="color:white" href="?page={{ employee.paginator.num_pages }}">Last &raquo;</a> </button>
         {% endif %}
     </span>
 </div>
