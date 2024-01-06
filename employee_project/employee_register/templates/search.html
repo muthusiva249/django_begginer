@@ -17,8 +17,43 @@
 </style>
 
 <body>
-
-          
+    <div class="container mt-3">
+        <h2 style="text-align: center"  "text-center text-info">Retrieve Employee Details</h2>
+    </div>
+    <table align="center" style="margin: 0px auto;">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Designation</th>
+                <th>Salary</th>
+                <th>Edit Employee</th>
+                <th>Remove Employee</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{employee.id}}</td>
+                <td>{{employee.firstname}}</td>
+                <td>{{employee.lastname}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.contact}}</td>
+                <td>{{employee.designation}}</td>
+                <td>{{employee.salary}}</td>
+                <td>
+                    <a href="/update/{{employee.pk}}">Update</a>    
+                </td>
+                <td>
+                    <a href="/delete/{{employee.pk}}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
 </html>

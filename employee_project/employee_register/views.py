@@ -15,7 +15,7 @@ def create_employee(request):
                 form.save()
                 success_message = 'Employee created successfully!'
                 messages.success(request, success_message)
-                return redirect(reverse('create-employee'))
+                return redirect('search/')
             except:
                 pass
     else:
@@ -28,4 +28,35 @@ def create_employee(request):
         
 def retrieve_employee(request):
     employees = Employee.objects.all()
-    return render(request,'search.html',{'employee':employees} )
+    return render(request,'search.html',{'employees':employees} )
+
+
+# Update Employee Details
+def update_employee(request,pk):
+    employees = Employee.objects.get(id=pk)
+    form = EmployeeForm(instance=employees)
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employees)
+        if form.is_valid():
+            form.save()
+            return redirect('/search')
+        
+    context = {
+        'employees': employees,
+        'form': form,
+    }
+    return render(request,'update.html',context)
+
+
+#Delete Employee Details
+def delete_employee(request,pk):
+    employees = Employee.objects.get(id=pk)
+
+    if request.method == 'POST':
+        employees.delete()
+        return redirect('/search')
+    context = {
+        'employees': employees,
+    }
+    return render(request, 'delete.html', context)
