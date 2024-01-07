@@ -159,11 +159,10 @@
     <th>Delete</th>
   </thead>
   <tbody>
-    {% with sno=1 %}
     {% for employees in employee %}
     <tr>
-      <!-- <td class="text-center">{{ sno }}</td> -->
-      <td >{{ forloop.counter }}</td>
+      <!-- <td >{{ forloop.counter }}</td> -->
+      <td >{{employee.start_index|add:forloop.counter0 }}</td>
       <td >{{employees.firstname}}</td>
       <td >{{employees.lastname}}</td>
       <td >{{employees.email}}</td>
@@ -174,11 +173,8 @@
       <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
     </tr>
     {% endfor %}
-    {% endwith %}
-
 </tbody>
 </table>
-
 <div class="pagination float-right">
     <span class="step-links">
         {% if employee.has_previous %}
