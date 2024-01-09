@@ -38,14 +38,6 @@
           <div class="row jumbotron box8">
             <div class="col-sm-12 mx-t3 mb-4">
               <h2 class="text-center text-info">Create Employee</h2>
-              <!--  -->
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-success" id="alert-message" role="alert">
-                    {{message}}
-                  </div>
-                {% endfor %}
-              {% endif %}
             </div>
 
         <div class="col-sm-6 form-group">
@@ -94,7 +86,7 @@
             required>
           <!-- {{ form.contact.errors }} -->
         </div>
-
+        
         <div class="col-sm-6 form-group">
           <label for="{{ form.designation.id_for_label }}">Desg</label>
           <input type="text" class="form-control" name="{{ form.designation.name }}"
@@ -123,16 +115,6 @@
       </div>
     </form>
   </div>
-
-  <script>
-    // Set timeout for the alert message
-    setTimeout(function() {
-        var alertMessage = document.getElementById('alert-message');
-        if (alertMessage) {
-            alertMessage.style.display = 'none';
-        }
-    }, 3000); // Adjust the time (in milliseconds) as needed
-  </script>
 
 </body>
 </html>
