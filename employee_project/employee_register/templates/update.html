@@ -2,19 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Employee Details</title>
+  <title>Update Employee</title>
 </head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<style>
+  label {
+    font-weight: 600;
+    color: #666;
+  }
+
+  body {
+    background: #f1f1f1;
+  }
+
+  .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+  }
+
+  .mx-t3 {
+    margin-top: -3rem;
+  }
+</style>
+
 <body>
-  <div class="container mt-3">
-    <h2 style="text-align: center"> Update Employee Details </h2>
+    <div class="container mt-3">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <!-- {{ form.as_p }} -->
+          <div class="row jumbotron box8">
+            <div class="col-sm-12 mx-t3 mb-4">
+              <h2 class="text-center text-info">Update Employee Details</h2>
+            </div>
 
-    <form action="" method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit">
+        <!-- print({{emp_details.firstname}})>> here in value u can this value instead u are using inside the input tag -->
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.firstname.id_for_label }}">First Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.firstname.name }}"
+              id="{{ form.firstname.id_for_label }}" placeholder="Enter your first name."
+              value="{{ form.firstname.value|default:'' }}" required>
+          </div>
+        </div>
 
-  </form>
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.lastname.id_for_label }}">Last Name</label>
+          <div class="input-group">
+            <input type="text" class="form-control" name="{{ form.lastname.name }}"
+              id="{{ form.lastname.id_for_label }}" placeholder="Enter your last name."
+              value="{{ form.lastname.value|default:'' }}" required>
+            <!-- {{ form.lastname.errors }} -->
+          </div>
+        </div>
+
+          <div class="col-sm-6 form-group">
+            <label for="{{ form.id_email.id_for_label }}">Email</label>
+            <input type="email" class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" placeholder="Enter your email." value="{{ form.email.value|default:'' }}" required >
+            <!-- {{ form.email.errors }} -->
+          </div>
+
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.contact.id_for_label }}">Contact</label>
+          <input type="tel" class="form-control" name="{{ form.contact.name }}" id="{{ form.contact.id_for_label }}"
+            placeholder="Enter your contact." value="{{ form.contact.value|default:'' }}" pattern="[6-9]\d{9}"
+            maxLength="10"
+            onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
+            required>
+          <!-- {{ form.contact.errors }} -->
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.designation.id_for_label }}">Desg</label>
+          <input type="text" class="form-control" name="{{ form.designation.name }}"
+            id="{{ form.designation.id_for_label }}" placeholder="Enter designation."
+            value="{{ form.designation.value|default:'' }}" required>
+          <!-- {{ form.designation.errors }} -->
+        </div>
+
+        <div class="col-sm-6 form-group">
+          <label for="{{ form.salary.id_for_label }}">Salary</label>
+          <input type="number" class="form-control" name="{{ form.salary.name }}" id="{{ form.salary.id_for_label }}"
+            placeholder="Enter salary." value="{{ form.salary.value|default:'' }}" required>
+          <!-- {{ form.salary.errors }} -->
+        </div>
+
+
+        <div class="col-sm-12 form-group mb-0">
+          <button type="submit" class="btn btn-primary float-right">Update</button>
+        </div>
+
+      </div>
+    </form>
   </div>
+
 </body>
 </html>

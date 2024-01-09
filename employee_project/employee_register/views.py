@@ -50,9 +50,9 @@ def retrieve_employee(request):
 
     return render(request, 'search.html', {'employee': employees_page, 'contact_filter': contact_filter,'email_filter': email_filter})
 
-
-# Update Employee
+## Update Employee
 def update_employee(request,pk):
+    success_message = None
     emp_details = Employee.objects.get(id=pk)
     form = EmployeeForm(instance=emp_details)
 
@@ -60,27 +60,25 @@ def update_employee(request,pk):
         form = EmployeeForm(request.POST, instance=emp_details)
         if form.is_valid():
             form.save()
+            success_message = 'Employee updated successfully!'
+            messages.success(request, success_message)
             return redirect('/search')
-
     context = {
         'emp_details': emp_details,
         'form': form,
     }
     return render(request,'update.html',context)
 
-
-# def update_employee(request,pk):
-#     employees = Employee.objects.get(id=pk)
-#     form = EmployeeForm(instance=employees)
-
-#     if request.method == 'POST':
-#         form = EmployeeForm(request.POST, instance=employees)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('/search')
-        
-#     context = {
-#         'employees': employees,
-#         'form': form,
-#     }
-#     return render(request,'update.html',context)
+## Delete Employee
+def delete_employee(request,pk):
+    delete_message = None
+    emp_details = Employee.objects.get(id=pk)
+    if request.method == 'POST':
+        emp_details.delete()
+        delete_message ="Employee record has been successfully deleted. "
+        messages.success(request, delete_message)
+        return redirect('/search')
+    context = {
+        'emp_details': emp_details,
+    }
+    return render(request, 'delete.html', context)
