@@ -169,9 +169,18 @@
       <td >{{employees.contact}}</td>
       <td >{{employees.designation}}</td>
       <td >{{employees.salary}}</td>
-      <td><button type="button" class="btn btn-success btn-sm">Update</button></td>
+      <td>
+        <a href="/update/{{emp_details.pk}}"><button type="button" class="btn btn-success btn-sm">Update</button></a></td>
       <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
     </tr>
+
+    <!-- <td>
+      <a href="/update/{{blog.pk}}">Update</a>    
+  </td>
+  <td>
+      <a href="/delete/{{blog.pk}}">Delete</a>
+  </td> -->
+
     {% endfor %}
 </tbody>
 </table>

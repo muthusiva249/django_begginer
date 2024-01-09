@@ -49,3 +49,38 @@ def retrieve_employee(request):
         employees_page = paginator.page(paginator.num_pages)
 
     return render(request, 'search.html', {'employee': employees_page, 'contact_filter': contact_filter,'email_filter': email_filter})
+
+
+# Update Employee
+def update_employee(request,pk):
+    emp_details = Employee.objects.get(id=pk)
+    form = EmployeeForm(instance=emp_details)
+
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=emp_details)
+        if form.is_valid():
+            form.save()
+            return redirect('/search')
+
+    context = {
+        'emp_details': emp_details,
+        'form': form,
+    }
+    return render(request,'update.html',context)
+
+
+# def update_employee(request,pk):
+#     employees = Employee.objects.get(id=pk)
+#     form = EmployeeForm(instance=employees)
+
+#     if request.method == 'POST':
+#         form = EmployeeForm(request.POST, instance=employees)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/search')
+        
+#     context = {
+#         'employees': employees,
+#         'form': form,
+#     }
+#     return render(request,'update.html',context)
