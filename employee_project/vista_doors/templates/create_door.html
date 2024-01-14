@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Door Details</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<style>
+    label {
+    font-weight: 600;
+    color: #666;
+}
+body {
+  background: #f1f1f1;
+}
+.box8{
+  box-shadow: 0px 0px 5px 1px #999;
+}
+.mx-t3{
+  margin-top: -3rem;
+}
+    </style>
+<!-- <form method="POST" > -->
+    <!-- <input type="submit" class="btn btn-success"> -->
+
+<body>
+    <div class="container mt-3">
+        <form method="POST"  enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="row jumbotron box8">
+            <div class="col-sm-12 mx-t3 mb-4">
+              <h2 class="text-center text-info">Upload Door Details</h2>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="door_name">Door Name</label>
+              <input type="text" class="form-control" name="door_name" id="door_name" placeholder="Enter your door name." required>
+            </div>
+
+            <div class="col-sm-6 form-group">
+                <label for="door_image">Upload Image</label>
+                <input type="file" name="door_image" value="door_name" class="form-control-file" id="door_image" accept="image/*">
+            </div>
+            <!-- <input type="hidden" name="timestamp" value="{{ current_timestamp }}"> -->
+            <div class="col-sm-12 form-group mb-0">
+              <button class="btn btn-primary float-right" type="submit">Submit</button>
+            </div>
+      
+          </div>
+        </form>
+      </div>
+</body>
+
+</html>
