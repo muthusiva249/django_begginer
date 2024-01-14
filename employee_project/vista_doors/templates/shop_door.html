@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.product-container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.product-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd; /* Add a border around the image */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px; /* Add some padding */
+}
+
+.product-title {
+    color: #333;
+}
+
+.product-price {
+    color: #e44d26; /* Orange color for the price */
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- <div class="product-container">
+        <img src="path/to/your/image.jpg" alt="Product Image">
+        <h1 class="product-title">Product Title</h1>
+        <p class="product-price">$99.99</p>
+    </div> -->
+
+{% for door in doors %}
+    <div class="door-container">
+        <!-- <img src="{{ door.image.url }}" alt="{{ door.door_name }} Image"> -->
+        <div class="col-sm-6 col-lg-4">
+            <img src="{{ door.door_image.url }}" alt="{{ door.door_name }} Image">
+        </div>
+        <h2 class="door-title">{{ door.door_name }}</h2>
+        <p class="door-timestamp">{{ door.timestamp }}</p>
+    </div>
+{% endfor %}
+
+</body>
+</html>

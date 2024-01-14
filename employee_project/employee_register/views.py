@@ -62,7 +62,7 @@ def update_employee(request,pk):
             form.save()
             success_message = 'Employee updated successfully!'
             messages.success(request, success_message)
-            return redirect('/search')
+            return redirect('retrieve-employee')
     context = {
         'emp_details': emp_details,
         'form': form,
@@ -77,7 +77,7 @@ def delete_employee(request,pk):
         emp_details.delete()
         delete_message ="Employee record has been successfully deleted. "
         messages.success(request, delete_message)
-        return redirect('/search')
+        return redirect('retrieve-employee')
     context = {
         'emp_details': emp_details,
     }
